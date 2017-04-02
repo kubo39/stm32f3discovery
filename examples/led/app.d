@@ -35,8 +35,9 @@ void delay(uint n)
 
 void powerOnGpioe()
 {
+    auto rcc = cast(Rcc*) RCC;
     // Pointer to the AHBENR register
-    auto ahbenr = cast(uint*) (RCC + RCC_AHBENR);
+    auto ahbenr = cast(uint*) &rcc.ahbenr;
     *ahbenr |= RCC_AHBENR_IOPEEN;
 }
 
