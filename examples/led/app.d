@@ -1,5 +1,3 @@
-import ldc.attributes;
-
 import stm32f3discovery;
 
 extern(C):
@@ -12,15 +10,17 @@ void start()
 {
     pragma(LDC_never_inline);
     powerOnGpioe();
-    putPe9InOutputMode();
+
+    auto gpioe = cast(GPIO*) GPIOE;
+    putPe9InOutputMode(gpioe);
 
     auto ticks = 100000;
 
     while (true)
     {
-        setPe9High();
+        setPe9High(gpioe);
         delay(ticks);
-        setPe9Low();
+        setPe9Low(gpioe);
         delay(ticks);
     }
 }
@@ -40,23 +40,23 @@ void powerOnGpioe()
     *ahbenr |= RCC_AHBENR_IOPEEN;
 }
 
-void putPe9InOutputMode()
+void putPe9InOutputMode(GPIO* gpioe)
 {
     // Pointer to the MODER register
-    auto moder = cast(uint*) (GPIOE + GPIOE_MODER);
+    auto moder = cast(uint*) &gpioe.moder;
     *moder = (*moder & !(0b11 << 18)) | (0b01 << 18);
 }
 
-void setPe9High()
+void setPe9High(GPIO* gpioe)
 {
     // Pointer to the BSRR register
-    auto bsrr = cast(uint*) (GPIOE + GPIOE_BSRR);
+    auto bsrr = cast(uint*) &gpioe.bsrr;
     *bsrr = 1 << 9;
 }
 
-void setPe9Low()
+void setPe9Low(GPIO* gpioe)
 {
     // Pointer to the BSRR register
-    auto bsrr = cast(uint*) (GPIOE + GPIOE_BSRR);
+    auto bsrr = cast(uint*) &gpioe.bsrr;
     *bsrr = 1 << (16 + 9);
 }
