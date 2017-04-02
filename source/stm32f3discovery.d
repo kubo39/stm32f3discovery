@@ -15,12 +15,12 @@ pragma(LDC_no_moduleinfo);
  *  Entorypont.
  */
 
-// User must call `start()`
+// User must call `main()`
 extern void start();
 
 void _reset()
 {
-    start();
+    main();
 }
 
 

@@ -6,7 +6,7 @@ nothrow:
 
 pragma(LDC_no_moduleinfo);
 
-void start()
+void main()
 {
     pragma(LDC_never_inline);
     powerOnGpioe();
