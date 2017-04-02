@@ -44,8 +44,31 @@ const uint RCC_AHBENR = 0x14;  // Offset address of the AHBENR register
 const uint RCC_AHBENR_IOPEEN = 1 << 21;  // IOPCEN bit mask
 
 
-const uint GPIOE_MODER = 0x0;  // Offset address of the CRH register
-const uint GPIOE_BSRR = 0x18;  // Offset address of the BSRR register
+/**
+ *  GPIO
+ */
+
+struct GPIO
+{
+    align (1):
+    uint* moder;  /* offser address of the CRH register */
+    uint* otyper;
+    uint* ospeedr;
+    uint* pupdr;
+    uint* idr;
+    uint* odr;
+    uint* bsrr;  // Offset address of the BSRR register
+    uint* lckr;
+    uint* afrl;
+    uint* afrh;
+    uint* brr;
+}
+
+GPIO* gpioe()
+{
+    return cast(GPIO*) GPIOE;
+}
+
 
 
 /**
