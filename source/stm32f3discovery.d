@@ -28,13 +28,21 @@ void _reset()
  *  Constants.
  */
 
+const uint GPIOA = 0x48000000;  // Start address of the GPIOA register block
+const uint GPIOB = 0x48000400;  // Start address of the GPIOB register block
+const uint GPIOC = 0x48000800;  // Start address of the GPIOC register block
+const uint GPIOD = 0x48000c00;  // Start address of the GPIOD register block
+const uint GPIOE = 0x48001000;  // Start address of the GPIOE register block
+const uint GPIOF = 0x48001400;  // Start address of the GPIOF register block
+const uint GPIOG = 0x48001800;  // Start address of the GPIOG register block
+const uint GPIOH = 0x48001c00;  // Start address of the GPIOH register block
+
 const uint RCC = 0x40021000;  // Start address of the RCC register block
 
 const uint RCC_AHBENR = 0x14;  // Offset address of the AHBENR register
 
 const uint RCC_AHBENR_IOPEEN = 1 << 21;  // IOPCEN bit mask
 
-const uint GPIOE = 0x48001000;  // Start address of the GPIOC register block
 
 const uint GPIOE_MODER = 0x0;  // Offset address of the CRH register
 const uint GPIOE_BSRR = 0x18;  // Offset address of the BSRR register
