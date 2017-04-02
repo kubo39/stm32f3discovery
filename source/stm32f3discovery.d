@@ -16,7 +16,7 @@ pragma(LDC_no_moduleinfo);
  */
 
 // User must call `main()`
-extern void start();
+extern void main();
 
 void _reset()
 {
