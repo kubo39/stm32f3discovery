@@ -1,15 +1,11 @@
 import stm32f3discovery;
 
-import ldc.llvmasm;
-import ldc.attributes;
-
 version(ARM_Thumb):
 extern(C):
 @nogc:
 nothrow:
 
 pragma(LDC_no_moduleinfo);
-pragma(LDC_no_typeinfo);
 
 void main()
 {

@@ -1,8 +1,5 @@
 import stm32f3discovery;
 
-import ldc.llvmasm;
-import ldc.attributes;
-
 extern(C):
 @nogc:
 nothrow:
