@@ -9,10 +9,10 @@ pragma(LDC_no_moduleinfo);
 void main()
 {
     pragma(LDC_never_inline);
-    powerOnGpioe();
 
-    auto gpioe = cast(GPIO*) GPIOE;
-    putPe9InOutputMode(gpioe);
+    initLED();
+
+    auto gpioe = gpioe();
 
     auto ticks = 100000;
 
@@ -27,26 +27,14 @@ void main()
 
 void delay(uint n)
 {
+    pragma(LDC_never_inline);
+
     foreach (_; 0 .. n)
     {
         // nop
     }
 }
 
-void powerOnGpioe()
-{
-    auto rcc = cast(Rcc*) RCC;
-    // Pointer to the AHBENR register
-    auto ahbenr = cast(uint*) &rcc.ahbenr;
-    *ahbenr |= RCC_AHBENR_IOPEEN;
-}
-
-void putPe9InOutputMode(GPIO* gpioe)
-{
-    // Pointer to the MODER register
-    auto moder = cast(uint*) &gpioe.moder;
-    *moder = (*moder & !(0b11 << 18)) | (0b01 << 18);
-}
 
 void setPe9High(GPIO* gpioe)
 {

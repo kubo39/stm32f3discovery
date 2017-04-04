@@ -88,6 +88,26 @@ GPIO* gpioe()
     return cast(GPIO*) GPIOE;
 }
 
+void powerOnGpioe()
+{
+    auto rcc = cast(Rcc*) RCC;
+    // Pointer to the AHBENR register
+    auto ahbenr = cast(uint*) &rcc.ahbenr;
+    *ahbenr |= RCC_AHBENR_IOPEEN;
+}
+
+void putPe9InOutputMode(GPIO* gpioe)
+{
+    // Pointer to the MODER register
+    auto moder = cast(uint*) &gpioe.moder;
+    *moder = (*moder & !(0b11 << 18)) | (0b01 << 18);
+}
+
+void initLED()
+{
+    powerOnGpioe();
+    putPe9InOutputMode(gpioe());
+}
 
 /**
  *  Exceptions.
