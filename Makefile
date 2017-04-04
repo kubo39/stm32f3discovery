@@ -16,6 +16,8 @@ $(TARGET): $(SRC)
 
 clean:
 	$(RM) $(OBJ) $(TARGET)
+	$(MAKE) -C $(EXDIR)/led clean
+	$(MAKE) -C $(EXDIR)/crash clean
 
 examples: $(TARGET)
 	$(MAKE) -C $(EXDIR)/led
