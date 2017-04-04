@@ -9,7 +9,7 @@ extern(C):
 nothrow:
 
 pragma(LDC_no_moduleinfo);
-
+pragma(LDC_no_typeinfo);
 
 /**
  *  Entorypont.
@@ -87,7 +87,6 @@ GPIO* gpioe()
 {
     return cast(GPIO*) GPIOE;
 }
-
 
 
 /**
