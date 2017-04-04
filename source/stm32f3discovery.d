@@ -96,17 +96,144 @@ void powerOnGpioe()
     *ahbenr |= RCC_AHBENR_IOPEEN;
 }
 
-void putPe9InOutputMode(GPIO* gpioe)
+void putPe15InOutputMode()
 {
-    // Pointer to the MODER register
+    auto gpioe = gpioe();
     auto moder = cast(uint*) &gpioe.moder;
-    *moder = (*moder & !(0b11 << 18)) | (0b01 << 18);
+    *moder |= (*moder & !(0b11 << 30)) | (0b01 << 30);
 }
+
+void putPe14InOutputMode()
+{
+    auto gpioe = gpioe();
+    auto moder = cast(uint*) &gpioe.moder;
+    *moder |= (*moder & !(0b11 << 28)) | (0b01 << 28);
+}
+
+void putPe13InOutputMode()
+{
+    auto gpioe = gpioe();
+    auto moder = cast(uint*) &gpioe.moder;
+    *moder |= (*moder & !(0b11 << 26)) | (0b01 << 26);
+}
+
+void putPe12InOutputMode()
+{
+    auto gpioe = gpioe();
+    auto moder = cast(uint*) &gpioe.moder;
+    *moder |= (*moder & !(0b11 << 24)) | (0b01 << 24);
+}
+
+void putPe11InOutputMode()
+{
+    auto gpioe = gpioe();
+    auto moder = cast(uint*) &gpioe.moder;
+    *moder |= (*moder & !(0b11 << 22)) | (0b01 << 22);
+}
+
+void putPe10InOutputMode()
+{
+    auto gpioe = gpioe();
+    auto moder = cast(uint*) &gpioe.moder;
+    *moder |= (*moder & !(0b11 << 20)) | (0b01 << 20);
+}
+
+void putPe9InOutputMode()
+{
+    auto gpioe = gpioe();
+    auto moder = cast(uint*) &gpioe.moder;
+    *moder |= (*moder & !(0b11 << 18)) | (0b01 << 18);
+}
+
+void putPe8InOutputMode()
+{
+    auto gpioe = gpioe();
+    auto moder = cast(uint*) &gpioe.moder;
+    *moder |= (*moder & !(0b11 << 16)) | (0b01 << 16);
+}
+
+/**
+ *  LED
+ */
+
+struct LED
+{
+    ubyte i;
+}
+
+void off(LED led) nothrow @nogc
+{
+    // Pointer to the BSRR register
+    auto bsrr = cast(uint*) &gpioe.bsrr;
+
+    if (led.i == 8)
+        *bsrr |= 1 << 24;
+    else if (led.i == 9)
+        *bsrr |= 1 << 25;
+    else if (led.i == 10)
+        *bsrr |= 1 << 26;
+    else if (led.i == 11)
+        *bsrr |= 1 << 27;
+    else if (led.i == 12)
+        *bsrr |= 1 << 28;
+    else if (led.i == 13)
+        *bsrr |= 1 << 29;
+    else if (led.i == 14)
+        *bsrr |= 1 << 30;
+    else if (led.i == 15)
+        *bsrr |= 1 << 31;
+    // else
+    //     TODO: raise exception!
+}
+
+void on(LED led) nothrow @nogc
+{
+    // Pointer to the BSRR register
+    auto bsrr = cast(uint*) &gpioe.bsrr;
+    if (led.i == 8)
+        *bsrr |= 1 << 8;
+    else if (led.i == 9)
+        *bsrr |= 1 << 9;
+    else if (led.i == 10)
+        *bsrr |= 1 << 10;
+    else if (led.i == 11)
+        *bsrr |= 1 << 11;
+    else if (led.i == 12)
+        *bsrr |= 1 << 12;
+    else if (led.i == 13)
+        *bsrr |= 1 << 13;
+    else if (led.i == 14)
+        *bsrr |= 1 << 14;
+    else if (led.i == 15)
+        *bsrr |= 1 << 15;
+    // else
+    //     TODO: raise exception!
+}
+
+
+__gshared LED[8] LEDS = [
+    LED(8),
+    LED(9),
+    LED(10),
+    LED(11),
+    LED(12),
+    LED(13),
+    LED(14),
+    LED(15),
+    ];
+
 
 void initLED()
 {
     powerOnGpioe();
-    putPe9InOutputMode(gpioe());
+    putPe15InOutputMode();
+    putPe14InOutputMode();
+    putPe13InOutputMode();
+    putPe12InOutputMode();
+    putPe11InOutputMode();
+    putPe10InOutputMode();
+    putPe9InOutputMode();
+    putPe8InOutputMode();
 }
 
 /**
