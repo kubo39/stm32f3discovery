@@ -159,57 +159,21 @@ void putPe8InOutputMode()
 struct LED
 {
     ubyte i;
+
+    void off() nothrow @nogc
+    {
+        // Pointer to the BSRR register
+        auto bsrr = cast(uint*) &gpioe.bsrr;
+        *bsrr |= 1 << (i + 16);
+    }
+
+    void on() nothrow @nogc
+    {
+        // Pointer to the BSRR register
+        auto bsrr = cast(uint*) &gpioe.bsrr;
+        *bsrr |= 1 << i;
+    }
 }
-
-void off(LED led) nothrow @nogc
-{
-    // Pointer to the BSRR register
-    auto bsrr = cast(uint*) &gpioe.bsrr;
-
-    if (led.i == 8)
-        *bsrr |= 1 << 24;
-    else if (led.i == 9)
-        *bsrr |= 1 << 25;
-    else if (led.i == 10)
-        *bsrr |= 1 << 26;
-    else if (led.i == 11)
-        *bsrr |= 1 << 27;
-    else if (led.i == 12)
-        *bsrr |= 1 << 28;
-    else if (led.i == 13)
-        *bsrr |= 1 << 29;
-    else if (led.i == 14)
-        *bsrr |= 1 << 30;
-    else if (led.i == 15)
-        *bsrr |= 1 << 31;
-    // else
-    //     TODO: raise exception!
-}
-
-void on(LED led) nothrow @nogc
-{
-    // Pointer to the BSRR register
-    auto bsrr = cast(uint*) &gpioe.bsrr;
-    if (led.i == 8)
-        *bsrr |= 1 << 8;
-    else if (led.i == 9)
-        *bsrr |= 1 << 9;
-    else if (led.i == 10)
-        *bsrr |= 1 << 10;
-    else if (led.i == 11)
-        *bsrr |= 1 << 11;
-    else if (led.i == 12)
-        *bsrr |= 1 << 12;
-    else if (led.i == 13)
-        *bsrr |= 1 << 13;
-    else if (led.i == 14)
-        *bsrr |= 1 << 14;
-    else if (led.i == 15)
-        *bsrr |= 1 << 15;
-    // else
-    //     TODO: raise exception!
-}
-
 
 __gshared LED[8] LEDS = [
     LED(8),
