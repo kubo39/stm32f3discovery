@@ -100,56 +100,56 @@ void putPe15InOutputMode()
 {
     auto gpioe = gpioe();
     auto moder = cast(uint*) &gpioe.moder;
-    *moder |= (*moder & !(0b11 << 30)) | (0b01 << 30);
+    *moder |= (*moder & ~(0b11 << 30)) | (0b01 << 30);
 }
 
 void putPe14InOutputMode()
 {
     auto gpioe = gpioe();
     auto moder = cast(uint*) &gpioe.moder;
-    *moder |= (*moder & !(0b11 << 28)) | (0b01 << 28);
+    *moder |= (*moder & ~(0b11 << 28)) | (0b01 << 28);
 }
 
 void putPe13InOutputMode()
 {
     auto gpioe = gpioe();
     auto moder = cast(uint*) &gpioe.moder;
-    *moder |= (*moder & !(0b11 << 26)) | (0b01 << 26);
+    *moder |= (*moder & ~(0b11 << 26)) | (0b01 << 26);
 }
 
 void putPe12InOutputMode()
 {
     auto gpioe = gpioe();
     auto moder = cast(uint*) &gpioe.moder;
-    *moder |= (*moder & !(0b11 << 24)) | (0b01 << 24);
+    *moder |= (*moder & ~(0b11 << 24)) | (0b01 << 24);
 }
 
 void putPe11InOutputMode()
 {
     auto gpioe = gpioe();
     auto moder = cast(uint*) &gpioe.moder;
-    *moder |= (*moder & !(0b11 << 22)) | (0b01 << 22);
+    *moder |= (*moder & ~(0b11 << 22)) | (0b01 << 22);
 }
 
 void putPe10InOutputMode()
 {
     auto gpioe = gpioe();
     auto moder = cast(uint*) &gpioe.moder;
-    *moder |= (*moder & !(0b11 << 20)) | (0b01 << 20);
+    *moder |= (*moder & ~(0b11 << 20)) | (0b01 << 20);
 }
 
 void putPe9InOutputMode()
 {
     auto gpioe = gpioe();
     auto moder = cast(uint*) &gpioe.moder;
-    *moder |= (*moder & !(0b11 << 18)) | (0b01 << 18);
+    *moder |= (*moder & ~(0b11 << 18)) | (0b01 << 18);
 }
 
 void putPe8InOutputMode()
 {
     auto gpioe = gpioe();
     auto moder = cast(uint*) &gpioe.moder;
-    *moder |= (*moder & !(0b11 << 16)) | (0b01 << 16);
+    *moder |= (*moder & ~(0b11 << 16)) | (0b01 << 16);
 }
 
 /**
