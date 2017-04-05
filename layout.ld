@@ -1,4 +1,4 @@
-ENTRY(_reset)
+ENTRY(_reset);
 
 MEMORY
 {
@@ -17,7 +17,7 @@ SECTIONS
     KEEP(*(.rodata._EXCEPTIONS));
     /* Reset handler */
     _reset = .;
-    *(.text._reset)
+    KEEP(*(.text._reset));
 
     /* the code */
     *(.text*)
