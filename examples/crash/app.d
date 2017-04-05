@@ -1,11 +1,8 @@
 import stm32f3discovery;
 
-version(ARM_Thumb):
 extern(C):
 @nogc:
 nothrow:
-
-pragma(LDC_no_moduleinfo);
 
 void main()
 {

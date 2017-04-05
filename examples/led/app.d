@@ -6,8 +6,6 @@ extern(C):
 @nogc:
 nothrow:
 
-pragma(LDC_no_moduleinfo);
-
 void main()
 {
     pragma(LDC_never_inline);
