@@ -1,5 +1,7 @@
 import stm32f3discovery;
 
+import led;
+
 extern(C):
 @nogc:
 nothrow:

@@ -4,7 +4,7 @@ include build/main.mk
 
 TARGET = libstm32f3discovery.a
 
-SRC = $(shell find ./source -name "*.d")
+SRCS = $(shell find ./source -name "*.d")
 OBJ = stm32f3discovery.o
 EXDIR = examples
 
@@ -12,8 +12,8 @@ LDCFLAGS = -mtriple=thumbv7em-none-linux-gnueabihf -defaultlib= -release -g -lib
 
 all: $(TARGET)
 
-$(TARGET): $(SRC)
-	$(LDC) $(LDCFLAGS) $<
+$(TARGET): $(SRCS)
+	$(LDC) $(LDCFLAGS) $^
 
 clean:
 	$(RM) $(OBJ) $(TARGET)
