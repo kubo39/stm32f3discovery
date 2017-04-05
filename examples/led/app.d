@@ -12,7 +12,7 @@ void main()
 
     initLED();
 
-    // Use shared to avoid __tls_get_addr error.
+    // Use shared to avoid `undefined reference __tls_get_addr` error.
     shared ticks = 100000;
 
     while (true)

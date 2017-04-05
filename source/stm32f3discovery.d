@@ -15,7 +15,7 @@ pragma(LDC_no_typeinfo);
  *  Entorypont.
  */
 
-// User must call `main()`
+// User must define `main()` function.
 extern void main();
 
 void _reset()
@@ -28,16 +28,16 @@ void _reset()
  *  Constants.
  */
 
-const uint GPIOA = 0x48000000;  // Start address of the GPIOA register block
-const uint GPIOB = 0x48000400;  // Start address of the GPIOB register block
-const uint GPIOC = 0x48000800;  // Start address of the GPIOC register block
-const uint GPIOD = 0x48000c00;  // Start address of the GPIOD register block
-const uint GPIOE = 0x48001000;  // Start address of the GPIOE register block
-const uint GPIOF = 0x48001400;  // Start address of the GPIOF register block
-const uint GPIOG = 0x48001800;  // Start address of the GPIOG register block
-const uint GPIOH = 0x48001c00;  // Start address of the GPIOH register block
+const uint GPIOA = 0x48000000;  // Start address of the GPIOA register
+const uint GPIOB = 0x48000400;  // Start address of the GPIOB register
+const uint GPIOC = 0x48000800;  // Start address of the GPIOC register
+const uint GPIOD = 0x48000c00;  // Start address of the GPIOD register
+const uint GPIOE = 0x48001000;  // Start address of the GPIOE register
+const uint GPIOF = 0x48001400;  // Start address of the GPIOF register
+const uint GPIOG = 0x48001800;  // Start address of the GPIOG register
+const uint GPIOH = 0x48001c00;  // Start address of the GPIOH register
 
-const uint RCC = 0x40021000;  // Start address of the RCC register block
+const uint RCC = 0x40021000;  // Start address of the RCC register
 
 const uint RCC_AHBENR_IOPEEN = 1 << 21;  // IOPCEN bit mask
 
@@ -162,14 +162,12 @@ struct LED
 
     void off() nothrow @nogc
     {
-        // Pointer to the BSRR register
         auto bsrr = cast(uint*) &gpioe.bsrr;
         *bsrr |= 1 << (i + 16);
     }
 
     void on() nothrow @nogc
     {
-        // Pointer to the BSRR register
         auto bsrr = cast(uint*) &gpioe.bsrr;
         *bsrr |= 1 << i;
     }
