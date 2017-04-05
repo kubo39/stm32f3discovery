@@ -1,3 +1,6 @@
+TOP_DIR = $(shell while [ ! -f build/main.mk ]; do cd ..; done; pwd)
+include $(TOP_DIR)/build/main.mk
+
 .PHONY: all clean
 
 TARGET = led.bin
@@ -5,13 +8,11 @@ TARGET = led.bin
 SRC = $(shell find ./ -name "*.d")
 OBJ = app.o
 
-LDC = ldc2
 LDCFLAGS = -mtriple=thumbv7em-none-linux-gnueabihf -c -g -defaultlib= -release
-LD = arm-none-eabi-ld
-LDFLAGS = -T ../../layout.ld --gc-section -nostartfiles
+LDFLAGS = -T $(TOP_DIR)/layout.ld --gc-section -nostartfiles
 
-LIBLARY = libstm32f3discovery.a
-LINKFLAGS = -I../../source
+LIBRARY = stm32f3discovery
+LINKFLAGS = -I$(TOP_DIR)/source
 
 .SUFFIXES: .d .o
 
@@ -21,7 +22,7 @@ run: $(TARGET)
 	@arm-none-eabi-gdb -q -iex "set auto-load safe-path ./" $(TARGET)
 
 $(TARGET): $(OBJ)
-	$(LD) $< $(LDFLAGS) -o $@ -L../.. -lstm32f3discovery
+	$(LD) $< $(LDFLAGS) -o $@ -L$(TOP_DIR) -l$(LIBRARY)
 
 .d.o: $(SRC)
 	$(LDC) $(LDCFLAGS) -op $(LINKFLAGS) $<
