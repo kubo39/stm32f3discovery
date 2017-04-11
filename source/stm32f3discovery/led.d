@@ -1,6 +1,6 @@
-module led;
+module stm32f3discovery.led;
 
-import gpio;
+import stm32f3discovery.gpio;
 
 version(ARM_Thumb):
 extern(C):

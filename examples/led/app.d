@@ -1,6 +1,6 @@
 import stm32f3discovery;
 
-import led;
+import stm32f3discovery.led;
 
 extern(C):
 @nogc:

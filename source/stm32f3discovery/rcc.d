@@ -1,4 +1,4 @@
-module rcc;
+module stm32f3discovery.rcc;
 
 version(ARM_Thumb):
 extern(C):

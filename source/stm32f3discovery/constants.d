@@ -1,4 +1,4 @@
-module constants;
+module stm32f3discovery.constants;
 
 version(ARM_Thumb):
 extern(C):

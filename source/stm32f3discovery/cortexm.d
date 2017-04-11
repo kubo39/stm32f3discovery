@@ -1,4 +1,4 @@
-module stm32f3discovery;
+module stm32f3discovery.cortexm;
 
 import ldc.llvmasm;
 import ldc.attributes;

@@ -1,7 +1,7 @@
-module gpio;
+module stm32f3discovery.gpio;
 
-import constants;
-import rcc;
+import stm32f3discovery.constants;
+import stm32f3discovery.rcc;
 
 version(ARM_Thumb):
 extern(C):
