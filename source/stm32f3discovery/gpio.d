@@ -18,7 +18,6 @@ pragma(LDC_no_typeinfo);
 
 struct GPIO
 {
-    align (1):
     uint moder;  /* offser address of the CRH register */
     uint otyper;
     uint ospeedr;

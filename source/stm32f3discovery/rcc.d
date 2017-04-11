@@ -11,7 +11,6 @@ nothrow:
 
 struct Rcc
 {
-    align (1):
     uint cr;
     uint cfgr;
     uint cir;
