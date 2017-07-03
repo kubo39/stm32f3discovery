@@ -34,6 +34,13 @@ $ groups $(id -nu)| grep uucp
 (..) uucp (..)
 ```
 
+If not, add yourself to `uucp` group.
+
+```console
+$ sudo usermod -a -G uucp $(id -nu)
+```
+
+
 ## Example
 
 ### LED
