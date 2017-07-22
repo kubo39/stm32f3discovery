@@ -18,7 +18,7 @@ void main()
     {
         foreach (led; LEDS)
         {
-            led.on;
+            led.on();
             delay(ticks);
             led.off();
             delay(ticks);
@@ -32,6 +32,6 @@ void delay(uint n)
 
     foreach (_; 0 .. n)
     {
-        // nop
+        nop();
     }
 }

@@ -1,7 +1,7 @@
 module stm32f3discovery.cortexm;
 
-import ldc.llvmasm;
 import ldc.attributes;
+public import stm32f3discovery.assembly;
 
 version(ARM_Thumb):
 extern(C):
@@ -45,12 +45,6 @@ typeof(&handler)[14] _EXCEPTIONS = [
     &handler, // PendSV
     &handler]; // Systick
 
-
-void bkpt()
-{
-    pragma(LDC_allow_inline);
-    __asm("bkpt", "");
-}
 
 void handler()
 {
