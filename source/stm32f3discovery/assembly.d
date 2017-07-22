@@ -21,3 +21,9 @@ void nop()
     pragma(LDC_allow_inline);
     __asm("nop", "");
 }
+
+void wfi()
+{
+    pragma(LDC_allow_inline);
+    __asm("wfi", "");
+}

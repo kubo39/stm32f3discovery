@@ -21,6 +21,9 @@ extern void main();
 void _reset()
 {
     main();
+    while (true) {
+        wfi();
+    }
 }
 
 
@@ -50,5 +53,7 @@ void handler()
 {
     pragma(LDC_never_inline);
     bkpt();
-    while (true) {}
+    while (true) {
+        wfi();
+    }
 }
