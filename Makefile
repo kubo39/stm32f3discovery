@@ -5,7 +5,7 @@ include build/main.mk
 TARGET = libstm32f3discovery.a
 
 SRCS = $(shell find ./source -name "*.d")
-OBJS = constants.o gpio.o led.o rcc.o package.o cortexm.o assmbly.o
+OBJS = constants.o gpio.o led.o rcc.o package.o cortexm.o assembly.o
 EXDIR = examples
 
 LDCFLAGS = -mtriple=thumbv7em-none-linux-gnueabihf -defaultlib= -release -g -lib -of$(TARGET)
