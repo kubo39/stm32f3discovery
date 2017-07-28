@@ -9,6 +9,10 @@ nothrow:
  *  Rcc
  */
 
+__gshared Rcc* RCC = cast(Rcc*) 0x40021000;  // Start address of the RCC register
+
+const uint RCC_AHBENR_IOPEEN = 1 << 21;  // IOPCEN bit mask
+
 struct Rcc
 {
     uint cr;

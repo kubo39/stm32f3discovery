@@ -20,13 +20,13 @@ struct LED
 
     void off() nothrow @nogc
     {
-        auto bsrr = cast(uint*) &gpioe.bsrr;
+        auto bsrr = cast(uint*) &GPIOE.bsrr;
         *bsrr |= 1 << (i + 16);
     }
 
     void on() nothrow @nogc
     {
-        auto bsrr = cast(uint*) &gpioe.bsrr;
+        auto bsrr = cast(uint*) &GPIOE.bsrr;
         *bsrr |= 1 << i;
     }
 }
