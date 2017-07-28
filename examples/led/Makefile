@@ -6,9 +6,13 @@ include $(TOP_DIR)/build/main.mk
 TARGET = led.bin
 
 SRC = $(shell find ./ -name "*.d")
+INCLUDE_PATHS = \
+	-I${TOP_DIR}/source \
+	-I${TOP_DIR}/cortexm/source
+
 OBJ = app.o
 
-LDCFLAGS = -mtriple=thumbv7em-none-linux-gnueabihf -c -g -defaultlib= -release
+LDCFLAGS = -mtriple=thumbv7em-none-linux-gnueabihf -c -g -defaultlib= -release ${INCLUDE_PATHS}
 LDFLAGS = -T $(TOP_DIR)/layout.ld --gc-section -nostartfiles
 
 LIBRARY = stm32f3discovery
