@@ -6,13 +6,16 @@ include $(TOP_DIR)/build/main.mk
 TARGET = crash.bin
 
 SRC = $(shell find ./ -name "*.d")
+
 OBJ = app.o
 
 LDCFLAGS = -mtriple=thumbv7em-none-linux-gnueabihf -c -g -defaultlib= -release
 LDFLAGS = -T $(TOP_DIR)/layout.ld --gc-section -nostartfiles
 
 LIBRARY = stm32f3discovery
-LINKFLAGS = -I$(TOP_DIR)/source
+LINKFLAGS = \
+	-I$(TOP_DIR)/source \
+	-I${TOP_DIR}/cortexm/source
 
 .SUFFIXES: .d .o
 
@@ -25,7 +28,7 @@ $(TARGET): $(OBJ)
 	$(LD) $< $(LDFLAGS) -o $@ -L$(TOP_DIR) -l$(LIBRARY)
 
 .d.o: $(SRC)
-	$(LDC) $(LDCFLAGS) $< -op $(LINKFLAGS)
+	$(LDC) $(LDCFLAGS) $< -op ${LINKFLAGS}
 
 clean:
 	$(RM) $(OBJ) $(TARGET)
