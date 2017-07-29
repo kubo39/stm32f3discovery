@@ -9,9 +9,10 @@ SRCS = \
 	$(shell find ./cortexm/source -name "*.d")
 
 OBJS = constants.o gpio.o led.o rcc.o package.o cortexm.o assembly.o
+OBJDIR = out
 EXDIR = examples
 
-LDCFLAGS = -mtriple=thumbv7em-none-linux-gnueabihf -defaultlib= -release -g -lib -of$(TARGET)
+LDCFLAGS = -mtriple=thumbv7em-none-linux-gnueabihf -defaultlib= -release -g -lib -od=$(OBJDIR) -of$(TARGET)
 
 LINKFLAGS = \
 	-I./source \
@@ -23,7 +24,7 @@ $(TARGET): $(SRCS)
 	$(LDC) $(LDCFLAGS) -op ${LINKFLGAS} $^
 
 clean:
-	$(RM) $(OBJS) $(TARGET)
+	$(RM) -r $(OBJDIR)/* $(TARGET)
 	$(MAKE) -C $(EXDIR)/led clean
 	$(MAKE) -C $(EXDIR)/crash clean
 
