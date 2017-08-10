@@ -24,6 +24,14 @@ __gshared GPIO* GPIOG = cast(GPIO*) 0x48001800;  // Start address of the GPIOG r
 __gshared GPIO* GPIOH = cast(GPIO*) 0x48001c00;  // Start address of the GPIOH register
 
 
+enum Mode
+{
+    In = 0b00,
+    Out = 0b01,
+    AltFunc = 0b10,
+    Analog = 0b11,
+}
+
 struct GPIO
 {
     uint moder;  /* offser address of the CRH register */
@@ -46,50 +54,8 @@ void powerOnGpioe()
     *ahbenr |= RCC_AHBENR_IOPEEN;
 }
 
-void putPe15InOutputMode()
+void setMode(GPIO* gpio, ubyte pin, Mode mode)
 {
-    auto moder = &GPIOE.moder;
-    *moder |= (*moder & ~(0b11 << 30)) | (0b01 << 30);
-}
-
-void putPe14InOutputMode()
-{
-    auto moder = &GPIOE.moder;
-    *moder |= (*moder & ~(0b11 << 28)) | (0b01 << 28);
-}
-
-void putPe13InOutputMode()
-{
-    auto moder = &GPIOE.moder;
-    *moder |= (*moder & ~(0b11 << 26)) | (0b01 << 26);
-}
-
-void putPe12InOutputMode()
-{
-    auto moder = &GPIOE.moder;
-    *moder |= (*moder & ~(0b11 << 24)) | (0b01 << 24);
-}
-
-void putPe11InOutputMode()
-{
-    auto moder = &GPIOE.moder;
-    *moder |= (*moder & ~(0b11 << 22)) | (0b01 << 22);
-}
-
-void putPe10InOutputMode()
-{
-    auto moder = &GPIOE.moder;
-    *moder |= (*moder & ~(0b11 << 20)) | (0b01 << 20);
-}
-
-void putPe9InOutputMode()
-{
-    auto moder = &GPIOE.moder;
-    *moder |= (*moder & ~(0b11 << 18)) | (0b01 << 18);
-}
-
-void putPe8InOutputMode()
-{
-    auto moder = &GPIOE.moder;
-    *moder |= (*moder & ~(0b11 << 16)) | (0b01 << 16);
+    auto moder = &gpio.moder;
+    *moder |= (*moder & ~(0b11 << pin * 2)) | (mode << pin * 2);
 }

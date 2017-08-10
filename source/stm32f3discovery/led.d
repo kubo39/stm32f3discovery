@@ -46,12 +46,12 @@ __gshared LED[8] LEDS = [
 void initLED()
 {
     powerOnGpioe();
-    putPe15InOutputMode();
-    putPe14InOutputMode();
-    putPe13InOutputMode();
-    putPe12InOutputMode();
-    putPe11InOutputMode();
-    putPe10InOutputMode();
-    putPe9InOutputMode();
-    putPe8InOutputMode();
+    GPIOE.setMode(15, Mode.Out);
+    GPIOE.setMode(14, Mode.Out);
+    GPIOE.setMode(13, Mode.Out);
+    GPIOE.setMode(12, Mode.Out);
+    GPIOE.setMode(11, Mode.Out);
+    GPIOE.setMode(10, Mode.Out);
+    GPIOE.setMode(9, Mode.Out);
+    GPIOE.setMode(8, Mode.Out);
 }
