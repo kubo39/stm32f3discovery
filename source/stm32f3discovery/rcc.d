@@ -1,7 +1,6 @@
 module stm32f3discovery.rcc;
 
-version(ARM_Thumb):
-extern(C):
+version (ARM_Thumb)  : extern (C):
 @nogc:
 nothrow:
 
@@ -9,9 +8,9 @@ nothrow:
  *  Rcc
  */
 
-__gshared Rcc* RCC = cast(Rcc*) 0x40021000;  // Start address of the RCC register
+__gshared Rcc* RCC = cast(Rcc*) 0x40021000; // Start address of the RCC register
 
-const uint RCC_AHBENR_IOPEEN = 1 << 21;  // IOPCEN bit mask
+const uint RCC_AHBENR_IOPEEN = 1 << 21; // IOPCEN bit mask
 
 struct Rcc
 {
@@ -29,4 +28,3 @@ struct Rcc
     uint cfgr2;
     uint cfgr3;
 }
-

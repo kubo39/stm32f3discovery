@@ -2,7 +2,7 @@ import stm32f3discovery;
 
 import stm32f3discovery.led;
 
-extern(C):
+extern (C):
 @nogc:
 nothrow:
 
