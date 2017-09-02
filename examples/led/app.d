@@ -2,11 +2,10 @@ import stm32f3discovery;
 
 import stm32f3discovery.led;
 
-extern (C):
 @nogc:
 nothrow:
 
-void main()
+extern (C) void main()
 {
     pragma(LDC_never_inline);
 

@@ -9,7 +9,7 @@ SRC = $(shell find ./ -name "*.d")
 
 OBJ = app.o
 
-LDCFLAGS = -mtriple=thumbv7em-none-linux-gnueabihf -c -g -defaultlib= -release
+LDCFLAGS = -mtriple=thumbv7em-none-linux-gnueabihf -c -g -defaultlib= -Os -release
 LDFLAGS = -T $(TOP_DIR)/layout.ld --gc-section -nostartfiles
 
 LIBRARY = stm32f3discovery

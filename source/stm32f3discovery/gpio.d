@@ -1,8 +1,9 @@
 module stm32f3discovery.gpio;
 
+import cortexm;
 import stm32f3discovery.rcc;
 
-version (ARM_Thumb)  : extern (C):
+version (ARM_Thumb)  :
 @nogc:
 nothrow:
 
@@ -49,7 +50,7 @@ void powerOnGpioe()
 {
     // Pointer to the AHBENR register
     auto ahbenr = &RCC.ahbenr;
-    *ahbenr |= RCC_AHBENR_IOPEEN;
+    volatileStore(ahbenr,  *ahbenr | RCC_AHBENR_IOPEEN);
 }
 
 void setMode(GPIO* gpio, ubyte pin, Mode mode)

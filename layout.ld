@@ -25,12 +25,39 @@ SECTIONS
     KEEP(*(.text.reset_handler));
 
     /* the code */
-    *(.text*)
+    *(.text*);
   } > FLASH
+
+  /* __gshared immutable variables. */
+  .rodata : ALIGN(4)
+  {
+    *(.rodata);
+    *(.rodata*);
+    . = ALIGN(4);
+  } > FLASH
+
+  /* __gshared variables. */
+  .data : ALIGN(4)
+  {
+    *(.data);
+    *(.data.*);
+    . = ALIGN(4);
+  } > FLASH
+
+  /* uninitialized __gshared variables and C linkage. */
+  .bss : ALIGN(4) SUBALIGN(4)
+  {
+    _sbss = .;
+    *(.bss);
+    *(.bss.*);
+    . = ALIGN(4);
+    _ebss = .;
+  } > RAM
 
   /DISCARD/ :
   {
     *(.ARM.exidx*)
+    *(.ARM.extab*)
     *(.note.gnu.build-id*)
   }
 }

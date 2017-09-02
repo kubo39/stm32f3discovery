@@ -6,12 +6,13 @@ TARGET = libstm32f3discovery.a
 
 SRCS = \
 	$(shell find ./source -name "*.d") \
-	$(shell find ./cortexm/source -name "*.d")
+	$(shell find ./cortexm/source -name "*.d") \
+	$(shell find ./semihosting/source -name "*.d")
 
 OBJDIR = out
 EXDIR = examples
 
-LDCFLAGS = -mtriple=thumbv7em-none-linux-gnueabihf -defaultlib= -release -g -lib -od=$(OBJDIR) -of$(TARGET)
+LDCFLAGS = -mtriple=thumbv7em-none-linux-gnueabihf -defaultlib= -Os -release -g -lib -od=$(OBJDIR) -of$(TARGET)
 
 LINKFLAGS = \
 	-I./source \
