@@ -32,8 +32,11 @@ examples: $(TARGET)
 	$(MAKE) -C $(EXDIR)/led
 	$(MAKE) -C $(EXDIR)/crash
 
-led-run: $(TARGET)
-	$(MAKE) -C $(EXDIR)/led run
-
 crash-run: $(TARGET)
 	$(MAKE) -C $(EXDIR)/crash run
+
+itm-run: $(TARGET)
+	$(MAKE) -C $(EXDIR)/itm run
+
+led-run: $(TARGET)
+	$(MAKE) -C $(EXDIR)/led run
