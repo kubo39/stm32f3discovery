@@ -2,30 +2,36 @@ ENTRY(_reset);
 
 MEMORY
 {
-  CCRAM : ORIGIN = 0x10000000, LENGTH = 8K
-  FLASH : ORIGIN = 0x08000000, LENGTH = 256K
-  RAM : ORIGIN = 0x20000000, LENGTH = 40K
+  CCRAM (!rwxai) : ORIGIN = 0x10000000, LENGTH = 8K
+  FLASH (r!wxai) : ORIGIN = 0x08000000, LENGTH = 256K
+  RAM (!rwxai) : ORIGIN = 0x20000000, LENGTH = 40K
 }
 
 PROVIDE(_stack_start = ORIGIN(RAM) + LENGTH(RAM));
 
 SECTIONS
 {
-  .text ORIGIN(FLASH) : ALIGN(4)
+  .isr_vector ORIGIN(FLASH) : ALIGN(4)
   {
     /* Vector table */
-    LONG(_stack_start);
     _reset = .;
-    KEEP(*(.text._reset));
-    LONG(reset_handler + 1);
-    KEEP(*(.rodata.exceptions));
-    KEEP(*(.rodata.interrupts));
+    LONG(_stack_start);
+    KEEP(*(.isr_vector._reset));
+    KEEP(*(.isr_vector.exceptions));
+    KEEP(*(.isr_vector.interrupts));
+  } > FLASH
+
+  _stext = .;
+
+  .text _stext : ALIGN(4)
+  {
     /* Reset handler */
-    reset_handler = .;
     KEEP(*(.text.reset_handler));
 
     /* the code */
+    *(.text);
     *(.text*);
+    _etext = .;
   } > FLASH
 
   /* __gshared immutable variables. */
@@ -36,16 +42,8 @@ SECTIONS
     . = ALIGN(4);
   } > FLASH
 
-  /* __gshared variables. */
-  .data : ALIGN(4)
-  {
-    *(.data);
-    *(.data.*);
-    . = ALIGN(4);
-  } > FLASH
-
   /* uninitialized __gshared variables and C linkage. */
-  .bss : ALIGN(4) SUBALIGN(4)
+  .bss : ALIGN(4)
   {
     _sbss = .;
     *(.bss);
@@ -53,6 +51,17 @@ SECTIONS
     . = ALIGN(4);
     _ebss = .;
   } > RAM
+
+  /* __gshared variables. */
+  .data : ALIGN(4)
+  {
+    _sidata = LOADADDR(.data);
+    _sdata = .;
+    *(.data);
+    *(.data.*);
+    . = ALIGN(4);
+    _edata = .;
+} > FLASH
 
   /DISCARD/ :
   {

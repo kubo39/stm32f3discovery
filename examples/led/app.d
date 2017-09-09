@@ -2,6 +2,9 @@ import stm32f3discovery;
 
 import stm32f3discovery.led;
 
+pragma(LDC_no_moduleinfo);
+pragma(LDC_no_typeinfo);
+
 @nogc:
 nothrow:
 

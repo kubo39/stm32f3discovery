@@ -50,11 +50,11 @@ void powerOnGpioe()
 {
     // Pointer to the AHBENR register
     auto ahbenr = &RCC.ahbenr;
-    volatileStore(ahbenr,  *ahbenr | RCC_AHBENR_IOPEEN);
+    volatileStore(ahbenr, volatileLoad(ahbenr) | RCC_AHBENR_IOPEEN);
 }
 
 void setMode(GPIO* gpio, ubyte pin, Mode mode)
 {
     auto moder = &gpio.moder;
-    *moder |= (*moder & ~(0b11 << pin * 2)) | (mode << pin * 2);
+    *moder |= (volatileLoad(moder) & ~(0b11 << pin * 2)) | (mode << pin * 2);
 }
