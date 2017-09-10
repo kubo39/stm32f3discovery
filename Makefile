@@ -25,8 +25,9 @@ $(TARGET): $(SRCS)
 
 clean:
 	$(RM) -r $(OBJDIR)/* $(TARGET)
-	$(MAKE) -C $(EXDIR)/led clean
 	$(MAKE) -C $(EXDIR)/crash clean
+	$(MAKE) -C $(EXDIR)/led clean
+	$(MAKE) -C $(EXDIR)/semihosting clean
 
 examples: $(TARGET)
 	$(MAKE) -C $(EXDIR)/led
@@ -35,8 +36,8 @@ examples: $(TARGET)
 crash-run: $(TARGET)
 	$(MAKE) -C $(EXDIR)/crash run
 
-itm-run: $(TARGET)
-	$(MAKE) -C $(EXDIR)/itm run
+semihosting-run: $(TARGET)
+	$(MAKE) -C $(EXDIR)/semihosting run
 
 led-run: $(TARGET)
 	$(MAKE) -C $(EXDIR)/led run
